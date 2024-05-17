@@ -6,6 +6,7 @@ from typing import List, Tuple
 1-simple_pagination module
 """
 
+
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     return a tuple of size two containing a start index and an end index
