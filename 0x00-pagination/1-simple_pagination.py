@@ -43,8 +43,8 @@ class Server:
         """
         function that returns the appropriate page of the dataset
         """
-        assert (isinstance(page, int)) and page > 0
-        assert (isinstance(page_size, int)) and page_size > 0
+        assert type(page) == int and type(page_size) == int
+        assert page > 0 and page_size > 0
 
         # Dataset
         dataset = self.dataset()
