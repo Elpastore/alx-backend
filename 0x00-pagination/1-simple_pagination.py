@@ -2,7 +2,9 @@
 import csv
 import math
 from typing import List, Tuple
-
+"""
+1-simple_pagination module
+"""
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
