@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
+"""Simple pagination sample.
+"""
 import csv
-import math
 from typing import List, Tuple
-"""
-1-simple_pagination module
-"""
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Retrieves the index range from a given page and page size.
     """
-    return a tuple of size two containing a start index and an end index
-    """
-    start_index: int = (page - 1) * page_size
-    end_index: int = start_index + page_size
-
-    return (start_index, end_index)
+    start = (page - 1) * page_size
+    end = start + page_size
+    return (start, end)
 
 
 class Server:
@@ -23,8 +19,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
-        """
-        intit method
+        """Initializes a new Server instance.
         """
         self.__dataset = None
 
@@ -40,17 +35,12 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """Retrieves a page of data.
         """
-        function that returns the appropriate page of the dataset
-        """
-        assert (isinstance(page, int)) and page > 0
-        assert (isinstance(page_size, int)) and page_size > 0
-
-        # Dataset
-        dataset = self.dataset()
-
-        try:
-            start_index, end_index = index_range(page, page_size)
-            return dataset[start_index: end_index]
-        except IndexError:
+        assert type(page) == int and type(page_size) == int
+        assert page > 0 and page_size > 0
+        start, end = index_range(page, page_size)
+        data = self.dataset()
+        if start > len(data):
             return []
+        return data[start:end]
