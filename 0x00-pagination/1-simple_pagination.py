@@ -43,14 +43,15 @@ class Server:
         """
         function that returns the appropriate page of the dataset
         """
-        assert (isinstance(page, int)) and page > 0
-        assert (isinstance(page_size, int)) and page_size > 0
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
 
-        # Dataset
+        # get the data from the csv
         data = self.dataset()
 
         try:
-            start_index, end_index = index_range(page, page_size)
-            return data[start_index:end_index]
+            # get the index to start and end at
+            start, end = index_range(page, page_size)
+            return data[start:end]
         except IndexError:
             return []
