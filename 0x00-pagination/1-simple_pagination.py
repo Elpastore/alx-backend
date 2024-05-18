@@ -1,31 +1,20 @@
 #!/usr/bin/env python3
-"""Write a function named index_range that takes two integer
-arguments page and page_size.
-
-The function should return a tuple of size two containing a
-start index and an end index corresponding to the range of
-indexes to return in a list for those particular pagination
-parameters.
-
-Page numbers are 1-indexed, i.e. the first page is page 1.
-"""
-
-
 from typing import Tuple, List
 import csv
 import math
+"""
+1-simple_pagination module
+"""
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
-    start index and an end index corresponding to the range of
+    return a tuple of size two containing a start index and an end index
     """
-    # if page is 1, start at 0 and end at page_size
-    # if page is 2, start at ((page-1) * page_size) and
-    # end at (page_size * page)
-    # if page is 3, start at ((page-1) * page_size) and
-    # end at (page_size * page)
-    return ((page-1) * page_size, page_size * page)
+    start_index: int = (page - 1) * page_size
+    end_index: int = start_index + page_size
+
+    return (start_index, end_index)
 
 
 class Server:
@@ -34,6 +23,9 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """
+        intit method
+        """
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -48,16 +40,17 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """return the appropriate page of the dataset"""
-        assert type(page) is int and page > 0
-        assert type(page_size) is int and page_size > 0
+        """
+        function that returns the appropriate page of the dataset
+        """
+        assert (isinstance(page, int)) and page > 0
+        assert (isinstance(page_size, int)) and page_size > 0
 
-        # get the data from the csv
-        data = self.dataset()
+        # Dataset
+        dataset = self.dataset()
 
         try:
-            # get the index to start and end at
-            start, end = index_range(page, page_size)
-            return data[start:end]
+            start_index, end_index = index_range(page, page_size)
+            return dataset[start_index: end_index]
         except IndexError:
             return []
