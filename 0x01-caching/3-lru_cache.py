@@ -21,7 +21,7 @@ class LRUCache(BaseCaching):
         """
         add data in the cache
         """
-        if key is None and item is None:
+        if key is None or item is None:
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             # remove the least recently used
