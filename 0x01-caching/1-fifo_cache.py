@@ -3,6 +3,7 @@
 1-fifo_cache module
 """
 from base_caching import BaseCaching
+from collections import OrderedDict
 
 
 class FIFOCache(BaseCaching):
@@ -14,7 +15,8 @@ class FIFOCache(BaseCaching):
         init method
         """
         super().__init__()
-        self.cache_order = []
+        # self.cache_order = []
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """
@@ -23,9 +25,9 @@ class FIFOCache(BaseCaching):
         if key is None or item is None:
             return
         else:
-            if key in self.cache_order and len(self.cache_data) <= BaseCaching.MAX_ITEMS:
-                oldest_key = self.cache_order.pop(0)
-                del self.cache_data[oldest_key]
+            if key not in self.cache_data and len(self.cache_data) <= BaseCaching.MAX_ITEMS:
+                # oldest_key = self.cache_order.pop(0)
+                oldest_key, _ = self.cache_data.popitem(last=False)
                 print(f"DISCARD: {oldest_key}")
             self.cache_data[key] = item
             self.cache_order.append(key)
