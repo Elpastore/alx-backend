@@ -4,6 +4,8 @@
 """
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
+# The `_` function is a shorthand for the gettext function,
+# used to mark strings for translation
 
 
 class Config():
