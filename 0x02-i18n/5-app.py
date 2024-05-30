@@ -17,10 +17,12 @@ class Config():
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+# app config
 app = Flask("__name__")
 app.config.from_object(Config)
 babel = Babel(app)
 
+# users mock database
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
