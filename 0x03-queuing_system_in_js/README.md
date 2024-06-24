@@ -1,0 +1,1 @@
+This project is about Queueing systems in js  using redis and kue
